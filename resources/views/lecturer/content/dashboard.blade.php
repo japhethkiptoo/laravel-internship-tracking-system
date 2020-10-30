@@ -20,7 +20,6 @@
     <div class="main-content">
         <div class="container-fluid">
             <h3 class="page-title">Dashboard</h3>
-            {{Auth::user()->is_hod()}}
             <h3>{{($lec->isHod)?'HOD':'Lecturer' }} Dashboard</h3>
         </div>
     </div>

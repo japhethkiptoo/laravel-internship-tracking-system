@@ -19,6 +19,7 @@
      <div class="main-content">
         <div class="container-fluid">
         	<h3 class="page-title">My Firm</h3>
+			@if($firm)
         	<div class="row">
         		<div class="col-md-6">
         			<div class="panel">
@@ -29,10 +30,7 @@
         				  	Address: {{$firm->address}}, {{$firm->site}}
         				  </h4>
         				  <h4>
-        				  	Location: {{$firm->site}}
-        				  </h4>
-        				  <h4>
-        				  	Tel: {{$firm->tel}} Fax: {{$firm->fax}}
+        				  	Tel: {{$firm->tel}}
         				  </h4>
         				  <h4>
         				  	Fax: {{$firm->fax}}
@@ -55,6 +53,11 @@
         			
         		</div>
         	</div>
+			@else 
+			<div>
+				<p>{{ 'Please set your attached firm!'}}</p>
+			</div>
+			@endif
         </div>
      </div>
  </div>

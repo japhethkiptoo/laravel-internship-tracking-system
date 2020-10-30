@@ -21,33 +21,46 @@
 						<div class="content">
 							<div class="header">
 								<div class="logo text-center">
-									<img src="assets/img/logo-dark.png"  alt="Klorofil Logo"></div>
+									<h2>Internship Management</h2>
+								</div>
 								<p class="lead">Login</p>
 							</div>
 							
-							@if($errors->has('regno')&&$errors->has('password'))
+							@if($errors->has('identity')&&$errors->has('password'))
 							<div class="alert alert-danger alert-dismissible" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<i class="fa fa-times-circle"></i> All fields are required!
 							</div>
 							@endif
-							@if($errors->has('password') && !$errors->has('regno'))
+							@if($errors->has('email'))
+							<div class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<i class="fa fa-times-circle"></i>{{$errors->first('email')}}
+							</div>
+							@endif
+							@if($errors->has('idno'))
+							<div class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<i class="fa fa-times-circle"></i>{{$errors->first('idno')}}
+							</div>
+							@endif
+							@if($errors->has('password') && !$errors->has('identity'))
 							<div class="alert alert-danger alert-dismissible" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<i class="fa fa-times-circle"></i>{{$errors->first('password')}}
 							</div>
 							@endif
-							@if($errors->has('regno') && !$errors->has('password'))
+							@if($errors->has('identity') && !$errors->has('password'))
 							<div class="alert alert-danger alert-dismissible" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<i class="fa fa-times-circle"></i>{{$errors->first('regno')}}
+								<i class="fa fa-times-circle"></i>{{$errors->first('identity')}}
 							</div>
 							@endif
 							<form  method="POST" class="form-auth-small" action="{{ route('login')}}">
 								{{csrf_field()}}
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Registration No.</label>
-									<input type="text" class="form-control" id="signin-email" name="regno" value="{{old('regno')}}" placeholder="CT202/0036/14">
+									<input type="text" class="form-control" id="signin-email" name="identity" value="{{old('identity')}}" placeholder="Email Address | Identity No.">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
@@ -69,8 +82,8 @@
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Student Login</h1>
-							<p>by The Develovers</p>
+							<h1 class="heading">Signin</h1>
+							<p>Internship Management</p>
 						</div>
 					</div>
 					<div class="clearfix"></div>

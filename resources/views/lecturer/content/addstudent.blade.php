@@ -50,7 +50,7 @@
                           <label for="phone">Phone Number</label>
                           <input class="form-control" type="number" name="phone" value="{{old('phone')}}">
                 </div>
-                @php $courses = Auth::guard('lec')->user()->department()->first()->courses()->get();
+                @php $courses = Auth::user()->lec_details->department()->first()->courses()->get();
                   @endphp
 
                 <div class="form-group">

@@ -98,8 +98,8 @@ Route::group(['prefix'=>'lecturer'], function(){
 	//student crud
 	Route::get('/add/student',function(){
       return view('lecturer.content.addstudent');
-	})->name('add.student.form')->middleware('auth:lec');
-	Route::post('/add/student','StudentController@newStudent')->name('add.student')->middleware('auth:lec');
+	})->name('add.student.form')->middleware('auth');
+	Route::post('/add/student','StudentController@newStudent')->name('add.student')->middleware('auth');
 
 });
 

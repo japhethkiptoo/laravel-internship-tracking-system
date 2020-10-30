@@ -26,6 +26,7 @@
                 <div class="panel">
                   <div class="panel-heading">Assigned Courses</div>
                   <div class="panel-body">
+                  @if($assigned !== null)
                     <ul class="list-unstyled activity-list">
                       @foreach($assigned as $assignment)
                       <li>
@@ -35,11 +36,18 @@
                           @php
                             $attachment = $assignment->level()->first()->attachment()->first();
                           @endphp
+                          @if($attachment !== null)
                           <p>Start :{{\Carbon\carbon::parse($attachment->start)->format('l,d,M,y')}}</p>
                           <p>Duration: {{$attachment->duration}}</p>
+                          @else 
+                          <p>No Internship!</p>
+                          @endif
                       </li>
                       @endforeach
                     </ul>
+                    @else
+                    <p>No assigned classes!</p>
+                    @endif
                   </div>
                 </div>
               </div>

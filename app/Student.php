@@ -4,6 +4,7 @@ namespace Entern;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use User;
 
 class Student extends Authenticatable
 {
@@ -26,12 +27,18 @@ class Student extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function user() {
+        return $this->belongsTo('Entern\User', 'user_id')->withDefault();
+    }
+
+
     public function assessment(){
         return $this->hasMany('Entern\Assessment','student_id');
     }
 
     public function course(){
-    	return $this->belongsTo('Entern\Course','course');
+    	return $this->belongsTo('Entern\Course','course')->withDefault();
     }
 
     public function supervisor(){
@@ -46,7 +53,7 @@ class Student extends Authenticatable
         return $this->hasMany('Entern\Fieldwork');
     }
     public function level(){
-        return $this->belongsTo('Entern\SemYear','level_id');
+        return $this->belongsTo('Entern\SemYear','level_id')->withDefault();
     }
 
     public function weeks(){

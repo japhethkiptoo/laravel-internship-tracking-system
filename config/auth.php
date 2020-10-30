@@ -86,7 +86,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Entern\Student::class,
+            'model' => Entern\User::class,
         ],
 
         'supervisors' => [

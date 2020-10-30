@@ -20,11 +20,12 @@
       <div class="main-content">
         <div class="container-fluid">
          <h3 class="page-title">Dashboard</h3>
-         
+         @if($student)
          <div class="row">
            <div class="col-md-6">
              <div class="panel">
                <div class="panel-heading">School</div>
+               
                @php 
                     $course = $student->course()->with('department')->first();
                     $department = $course->department()->with('school')->first();
@@ -55,7 +56,7 @@
                </div>
              </div>
            </div>
-
+           @endif
          </div>
       </div>
     </div>

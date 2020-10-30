@@ -1,7 +1,7 @@
 <!-- LEFT SIDEBAR -->
     <div id="sidebar-nav" class="sidebar">
       <div class="sidebar-scroll">
-        @auth('lec')
+        @auth()
         <nav>
           <ul class="nav">
             <li><a href="{{route('lec.dashboard').'/'}}" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
@@ -15,7 +15,7 @@
             @endif
             
             <li><a href="{{route('notifications.lec')}}" class=""><i class="lnr lnr-chart-bars"></i> <span>Notifications <span class="badge">
-              {{Auth::guard('lec')->user()->unreadNotifications()->count()}}
+              {{Auth::guard()->user()->unreadNotifications()->count()}}
             </span></span></a></li>
             
             <li><a href="{{route('myassigned')}}" class=""><i class="lnr lnr-alarm"></i> 
@@ -24,11 +24,10 @@
               <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Settings</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
               <div id="subPages" class="collapse ">
                 <ul class="nav">
-                  <li><a href="{{route('profile.index')}}" class="">My Profile</a></li>
                   <li>
-                    <a href="{{route('lec.logout')}}" onclick="event.preventDefault(); document.getElementById('leclogoutform1').submit();
+                    <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('leclogoutform1').submit();
                             ">Logout
-                            <form id="leclogoutform1" style="display: none;" method="POST" action="{{route('lec.logout')}}">
+                            <form id="leclogoutform1" style="display: none;" method="POST" action="{{route('logout')}}">
                               {{ csrf_field() }}
                             </form>
                   </a>   

@@ -36,7 +36,10 @@
                             <tr>
                                 <td>{{$student->fname}} {{$student->lname}}</td>
                                 <td>{{$student->email}}</td>
-                                <td>{{$student->course()->first()->name}} {{$student->level()->first()->year}}.{{$student->level()->first()->sem}}</td>
+                                <td>{{($student->student_details) ? $student->student_details->course()->first()->name : 'n/a'}} 
+                                {{ ($student->student_details) ? $student->student_details->level()->first()->year : 'n/a'}}.
+                                {{ ($student->student_details) ? $student->level()->first()->sem : 'n/a'}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

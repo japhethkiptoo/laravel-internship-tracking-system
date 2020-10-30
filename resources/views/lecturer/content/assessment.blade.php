@@ -19,14 +19,14 @@
         <div class="container-fluid">
             <div class="panel">
               <div class="panel-heading">
-              	<h3>{{$student->fname.' '.$student->lname}}</h3>
+              	<h3>{{$user->fname.' '.$user->lname}}</h3>
               	<p>{{$student->course()->first()->name}} | {{$student->level()->first()->year}}.{{$student->level()->first()->sem}}</p>
               </div>
               <div class="panel-body">
               	@php 
               	    $assessment = $student->assessment()->OrderBy('created_at','asec')->get();
-                    
               	 @endphp
+				   @if($assessment !== null)
               	 <ul class="list-unstyled">
               	 	@foreach($assessment as $assess)
                         <li>
@@ -45,6 +45,9 @@
                         </li>
               	 	@endforeach
               	 </ul>
+				   @else 
+				   <p>No assessment yet!</p>
+				   @endif
               	
               </div>
           </div>

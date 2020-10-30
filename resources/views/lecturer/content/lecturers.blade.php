@@ -30,8 +30,8 @@
                       @foreach($lecs as $lec)
                       <li>
                         <a href="{{ route('lecturer',['id'=>$lec->id])}}">
-                        <h3>{{$lec->name}}</h3>
-                        <p>{{$lec->email}} | {{$lec->phone}}{{($lec->isHod)?'| HOD':''}}</p>
+                        <h3>{{$lec->user->fname}} {{ $lec->user->lname }}</h3>
+                        <p>{{$lec->user->email}} | {{ $lec->user->phone ?: 'No Phone'}} {{($lec->isHod)?'| HOD':''}}</p>
                         </a>
                       </li>
                       @endforeach

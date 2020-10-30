@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="brand">
-        <a href="{{route('lec.dashboard')}}"><img src="{{ asset('assets/img/logo-dark.png')}}" alt="Klorofil Logo" class="img-responsive logo"></a>
+        <a href="{{route('lec.dashboard')}}"><h4>Intern</h4></a>
       </div>
       <div class="container-fluid">
         <div class="navbar-btn">
@@ -14,8 +14,8 @@
           </div>
         </form>
         <div id="navbar-menu">
-          @auth('lec')
-          @php $notifications = Auth::guard('lec')->user()->unreadNotifications; @endphp
+          @auth()
+          @php $notifications = Auth::user()->unreadNotifications; @endphp
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
@@ -48,15 +48,14 @@
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('assets/img/user.png')}}" class="img-circle" alt="Avatar"> <span>{{Auth::user()->name}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                <img src="{{ asset('assets/img/user.png')}}" class="img-circle" alt="Avatar"> <span>{{Auth::user()->fname}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="{{route('profile.index')}}"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                 <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
                 <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
                 <li>
-                <a href="{{route('lec.logout')}}" onclick="event.preventDefault(); document.getElementById('leclogoutform').submit();
+                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('leclogoutform').submit();
                             "><i class="lnr lnr-exit"></i> <span>Logout</span>
-                            <form id="leclogoutform" style="display: none;" method="POST" action="{{route('lec.logout')}}">
+                            <form id="leclogoutform" style="display: none;" method="POST" action="{{route('logout')}}">
                               {{ csrf_field() }}
                             </form>
                 </a>      

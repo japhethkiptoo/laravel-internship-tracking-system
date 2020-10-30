@@ -41,38 +41,25 @@
 		</div>
 		<div class="row form-group">
 		  <div class="col-md-6 {{(!$errors->has('tel'))?'':'text-danger'}}">
-		  	<label>Tel</label>
-		    <input name="tel" type="tel" class="form-control {{(!$errors->has('tel'))?'':'is-invalid'}}" placeholder="tel" value="{{old('tel')}}">
+		  	<label>Phone Number(Primary)</label>
+		    <input name="tel" type="tel" class="form-control {{(!$errors->has('tel'))?'':'is-invalid'}}" placeholder="phone number" value="{{old('tel')}}">
 		    @if($errors->has('tel'))
     		<small class="form-text">{{ $errors->first('tel')}}</small>
     		@endif
 		  </div>
-		  <div class="col-md-6 {{(!$errors->has('fax'))?'':'text-danger'}}">
-		  	<label>Fax</label>
-		    <input name="fax" type="text" class="form-control {{(!$errors->has('fax'))?'':'is-invalid'}}" placeholder="fax" value="{{old('fax')}}">
-		    @if($errors->has('fax'))
-    		<small class="form-text">{{ $errors->first('fax')}}</small>
-    		@endif
-		  </div>
-		</div>
-		<div class="form-group {{(!$errors->has('site'))?'':'text-danger'}}">
-			<label for="input3">Site / Offline location</label>
-    		<input name="site" type="text" class="form-control {{(!$errors->has('site'))?'':'is-invalid'}}" id="input3" placeholder="site" value="{{old('site')}}">
-    		@if($errors->has('site'))
-    		<small class="form-text">{{ $errors->first('site')}}</small>
-    		@endif
+		  
 		</div>
 
 		<div class="form-group {{(!$errors->has('supervisor_name'))?'':'text-danger'}}">
 			<label for="input4">Supervisor`s / Foreman`s Name </label>
-    		<input name="supervisor_name" type="text" class="form-control {{(!$errors->has('supervisor_name'))?'':'is-invalid'}}" id="input4" placeholder="supervisor" value="{{old('supervisor_name')}}">
+    		<input name="supervisor_name" type="text" class="form-control {{(!$errors->has('supervisor_name'))?'':'is-invalid'}}" id="input4" placeholder="supervisor`s name" value="{{old('supervisor_name')}}">
     		@if($errors->has('supervisor_name'))
     		<small class="form-text">{{ $errors->first('supervisor_name')}}</small>
     		@endif
 		</div>
 		<div class="form-group {{(!$errors->has('supervisor_email'))?'':'text-danger'}}">
 			<label for="input4">Supervisor`s / Foreman`s Email </label>
-    		<input name="supervisor_email" type="text" class="form-control {{(!$errors->has('supervisor'))?'':'is-invalid'}}" id="input4" placeholder="supervisor email" value="{{old('supervisor_email')}}">
+    		<input name="supervisor_email" type="text" class="form-control {{(!$errors->has('supervisor'))?'':'is-invalid'}}" id="input4" placeholder="supervisor`s email" value="{{old('supervisor_email')}}">
     		@if($errors->has('supervisor_email'))
     		<small class="form-text">{{ $errors->first('supervisor_email')}}</small>
     		@endif

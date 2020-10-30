@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.app')
 
 @section('content')
 
@@ -9,14 +9,15 @@
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('login') }}">
                                          {{ csrf_field() }}
+                                         {{ $errors }}
                                         <div class="form-group">
                                             <div class="input-group">
                                               <span class="input-group-addon" id="basic-addon1">
                                                   <i class="fa fa-user fa-fw"></i>
                                               </span>
                                               <input type="text" class="form-control
-                                              {{(!$errors->has('regno'))?'':'is-invalid'}}" placeholder="ct202/0036/14" aria-describedby="basic-addon1" name="regno" 
-                                              value="{{old('regno')}}">
+                                              {{(!$errors->has('regno'))?'':'is-invalid'}}" placeholder="ct202/0036/14" aria-describedby="basic-addon1" name="identity" 
+                                              value="{{old('identity')}}">
                                             </div>
                                             @if($errors->has('regno'))
                                             <div class="form-text text-danger">{{$errors->first('regno')}}</div>

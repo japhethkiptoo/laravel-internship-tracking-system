@@ -24,12 +24,12 @@ class FieldworkController extends Controller
     {  
 
        $field = Field::all();
-       $attachment = Auth::user()->level()->first()->attachment()->first();
+       $attachment = Auth::user()->student_details->level()->first()->attachment()->first();
        $start = carbon::parse($attachment->start);
        $today = carbon::now();
        $week = $this->week($start,$today);
 
-       $weektasks = Auth::user()->field()->where('week',$week)->get();
+       $weektasks = Auth::user()->student_details->field()->where('week',$week)->get();
 
        return view('student.field.field',['field'=>$field,
                                         'tasks'=>$weektasks,
@@ -45,7 +45,7 @@ class FieldworkController extends Controller
     }
 
     public function allTasks(){
-      return view('student.field.all',['tasks'=>Auth::user()->field()->get()]);
+      return view('student.field.all',['tasks'=>Auth::user()->student_details->field()->get()]);
     }
 
     /**
@@ -74,12 +74,12 @@ class FieldworkController extends Controller
          $field->work = $request->get('work');
          $field->comment = '';
 
-         $student = Auth::user();
+         $student = Auth::user()->student_details;
          $student->field()->save($field);
 
          //notify sup
-         $sup = Auth::user()->supervisor()->first();
-         $sup->notify(new NewTask($student,'New Task'));
+         // $sup = Auth::user()->student_details->supervisor()->first();
+         // $sup->notify(new NewTask($student,'New Task'));
 
          return redirect()->back()->with(['status'=>'success',
           'message'=>'Task saved!']);

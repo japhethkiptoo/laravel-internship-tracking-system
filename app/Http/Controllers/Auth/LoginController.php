@@ -32,11 +32,31 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    public function redirectTo() {
+        $role = Auth::User()->role;
+        switch ($role) {
+            case 'student':
+                return '/';
+                break;
+
+            case 'lecturer':
+                return '/lecturer';
+                break;
+
+            default:
+                return '/login';
+                break;
+        }
+    }
 
 
-    public function username(){
-        return 'regno';
+    public function username() {
+        $login = request()->input('identity');
+
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'idno';
+        request()->merge([$field => $login]);
+
+        return $field;
     }
 
     /**
@@ -52,6 +72,7 @@ class LoginController extends Controller
     public function showLoginForm(){
         return view('student.auth.student-login');
     }
+
 
     public function login(Request $request){
        
@@ -76,13 +97,21 @@ class LoginController extends Controller
         
     }
 
-    protected function validateLogin(Request $request){
+    protected function validateLogin(Request $request)
+    {
+        $messages = [
+            'identity.required' => 'Email or Id number cannot be empty',
+            'email.exists' => 'Email or Id number already registered',
+            'username.exists' => 'Username is already registered',
+            'password.required' => 'Password cannot be empty',
+        ];
 
-        $this->validate($request, [
-            $this->username() => 'required|string',
+        $request->validate([
+            'identity' => 'required|string',
             'password' => 'required|string',
-        ]);
-  
+            'email' => 'string|exists:users',
+            'username' => 'string|exists:users',
+        ], $messages);
     }
 
     protected function sendLoginResponse(Request $request)
@@ -96,7 +125,6 @@ class LoginController extends Controller
     }
 
     protected function isOnAttachment(Request $request){
-   
        return True ;
     }
 
@@ -117,6 +145,23 @@ class LoginController extends Controller
 
         return false;
 
+    }
+
+    protected function authenticated(Request $request, $user)
+    {   $role = $user->role;
+        switch ($role) {
+            case 'student':
+                return redirect()->route('home')->with(['status'=>'success','msg','Successful Login!']);
+                break;
+
+            case 'lecturer':
+                return redirect()->route('lec.dashboard')->with(['status'=>'success','msg','Successful Login!']);
+                break;
+
+            default:
+                return '/login';
+                break;
+        }
     }
 
     public function logout(){

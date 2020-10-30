@@ -4,21 +4,20 @@ namespace Entern;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class Lecturer extends Authenticatable
+class Lecturer extends Model
 {   
-
-	use Notifiable;
-
 	
     protected $fillable = [
-      'name','phone','department','email','password'
+      'department', 'user_id', 'isHod'
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+
+    public function user() {
+        return $this->belongsTo('Entern\User', 'user_id')->withDefault();
+    }
 
     public function is_hod(){
         return (Auth::guard('lec')->user()->isHod == 1)? true : false;

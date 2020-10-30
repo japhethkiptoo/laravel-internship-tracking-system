@@ -52,35 +52,34 @@ class FirmController extends Controller
        $firm->firm = $request->get('firm');
        $firm->address = $request->get('address');
        $firm->tel = $request->get('tel');
-       $firm->fax = $request->get('fax');
-       $firm->site = $request->get('site');
        $firm->student_id = Auth::user()->id;
-
        //sup
        $email = $request->get('supervisor_email');
        $name = $request->get('supervisor_name');
        $sup = Supervisor::where('email',$email)->first();
-       if(!empty($sup)){
+       if($sup !== null){
         $sup->name = $name;
-        $sup->password = bcrypt('password');
         $sup->save();
+         //set supervisor
+        
        }else{
         $sup = new Supervisor();
         $sup->name = $name;
         $sup->email = $email;
-        $sup->phone = '';
-        $sup->password = bcrypt('password');
+        $sup->phone = $request->get('tel');
         $sup->save();
        }
+       $firm->supervisor = $sup->id;
+        Auth::user()->student_details->firm()->save($firm);
+        $student = Auth::user()->student_details;
+        $student->supervisor = $sup->id;
+        $student->save();
 
-       $sup->firm()->save($firm);
+        
 
-       //set supervisor
-      $student = Student::find(Auth::id());
-      $student->supervisor = $sup->id;
-      $student->save();
       
-       return redirect()->back()->with(['status'=>'success','message'=>'You are ready for your Internship! Supervisor is Registered: email = '.$email.', password = password']);
+      
+       return redirect()->route('home')->with(['status'=>'success','message'=>'You are ready for your Internship! Supervisor is Registered: email = '.$email.', password = password']);
 
     }
 
@@ -120,10 +119,8 @@ class FirmController extends Controller
        $firm->firm = $request->get('firm');
        $firm->address = $request->get('address');
        $firm->tel = $request->get('tel');
-       $firm->fax = $request->get('fax');
-       $firm->site = $request->get('site');
        $firm->supervisor = $request->get('supervisor');
-
+       $firm->save();
      
     }
 

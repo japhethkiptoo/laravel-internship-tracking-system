@@ -15,7 +15,7 @@ class CourseController extends Controller
     
     public function __construct(){
     
-        $this->middleware('auth:lec');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class CourseController extends Controller
      */
     public function index()
     {   
-        $u = Auth::guard('lec')->user();
+        $u = Auth::user()->lec_details;
 
         $d = Department::with('courses','school')->findOrFail($u->department);
 
@@ -37,7 +37,7 @@ class CourseController extends Controller
     }
 
     public function getLevels($id){
-        $levels = Level::isAvailable()->where('course_id',$id)->get();
+        $levels = Level::where('course_id',$id)->get();
         
         return response()->json([
             'status' =>'success',
@@ -67,7 +67,7 @@ class CourseController extends Controller
             'name'=>'required|unique:courses',
             'description'=>'required'
         ]);
-        $department = Auth::user()->department()->first();
+        $department = Auth::user()->lec_details->department()->first();
         $c = new C();
         $c->name = $request->get('name');
         $c->description = $request->get('description');

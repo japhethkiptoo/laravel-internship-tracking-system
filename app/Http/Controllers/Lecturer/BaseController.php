@@ -12,14 +12,13 @@ class BaseController extends Controller
     
     public function __construct(){
     
-    	$this->middleware('auth:lec');
+    	$this->middleware('auth');
     }
 
     public function index(){
-
-    	$user = Lec::findOrFail(Auth::id());
-       
-    	return view('lecturer.content.dashboard',['lec'=> $user]);
+        $user = Auth::user();
+        $lec = $user->lec_details;
+    	return view('lecturer.content.dashboard',['lec'=> $lec]);
     	
     }
 }

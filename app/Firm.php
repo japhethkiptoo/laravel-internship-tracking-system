@@ -12,8 +12,6 @@ class Firm extends Model
              'firm' => 'required|string',
              'address' => 'required|string',
              'tel' => 'required|numeric|min:12',
-             'fax' => 'required|numeric|min:4', 
-             'site' => 'required|string',
              'supervisor_name' => 'required|string',
              'supervisor_email' => 'required|email',     
             

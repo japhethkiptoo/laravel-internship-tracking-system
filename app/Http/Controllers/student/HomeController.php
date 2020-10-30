@@ -18,37 +18,36 @@ class HomeController extends Controller
     }
 
 
-    public function index(){
+    public function index() {
 
         if($this->checkAttachment()){
             if($this->hasFirmSet() != null){
-                $user = Auth::user()->with('course')->first();
-                return view('student.area.home',['student'=>$user]);
+                $user = Auth::user();
+                $student = $user->student_details->with('course')->first(); //Auth::user()->student_details()->with('course')->first();
+                return view('student.area.home',['student'=>$student, 'user'=> $user ]);
             }else{
                 return view('student.firm.setfirm');
             }
             
         }else{
-            return 'not attached';
+            return view('student.profile.notattached');
         }
-        
-        
     }
 
     public function checkAttachment(){
-        $attach = Auth::user()->level()->first();
-        $attach = $attach->attachment()->first();
+        $student = Auth::user()->student_details;
+        $attach = ($student) ? $student->level()->first() : null;
+        $attach = ($attach) ? $attach->attachment()->first() : null;
         if($attach == null){
             return false;
         }else{
             $start = Carbon::parse($attach->start);
             return true;
         }
-    	
     }
 
     public function hasFirmSet(){
-        return Auth::user()->firm()->first();
+        return (Auth::user() && Auth::user()->student_details->firm) ? Auth::user()->student_details->firm()->first() : null;
     }
 
 }

@@ -15,14 +15,10 @@ class CreateLecturersTable extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('password');
-            $table->rememberToken();
             $table->boolean('isHod')->default(0);
             $table->integer('department')->unsigned();
             $table->foreign('department')->references('id')->on('departments');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }

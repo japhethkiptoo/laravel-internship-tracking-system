@@ -34,6 +34,7 @@ class RedirectIfAuthenticated
                 break;
 
             case 'web':
+                dd(Auth::user());
                 if (Auth::guard($guard)->check()) {
                     return redirect()->route('home');
                 }

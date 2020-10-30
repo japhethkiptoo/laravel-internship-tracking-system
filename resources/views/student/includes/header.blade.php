@@ -1,7 +1,9 @@
 <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="brand">
-        <a href="{{route('home')}}"><img src="{{ asset('assets/img/logo-dark.png')}}"  alt="Klorofil Logo" class="img-responsive logo"></a>
+        <a href="{{route('home')}}">
+         <h4>Intern</h4>
+        </a>
       </div>
       <div class="container-fluid">
         <div class="navbar-btn">

@@ -20,8 +20,6 @@ class CreateFirmsTable extends Migration
             $table->string('firm')->unique();
             $table->string('address');
             $table->string('tel');
-            $table->string('fax');
-            $table->string('site');
             $table->integer('supervisor')->unsigned();
             $table->foreign('supervisor')->references('id')->on('supervisors');
             $table->timestamps();

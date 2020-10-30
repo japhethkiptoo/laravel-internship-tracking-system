@@ -8,16 +8,17 @@ use Entern\lecturer;
 use Entern\Assigned;
 use Entern\SemYear as Level;
 use Entern\Student;
+use Entern\User;
 
 class LecturerController extends Controller
 {   
 	
     public function __construct(){
-        $this->middleware('auth:lec');
+        $this->middleware('auth');
     }
 
     public function index(){
-        $u  = Auth::user();
+        $u  = Auth::user()->lec_details;
         $d = $u->department()->first();
         $lecs = $d->lecturers()->get();
 
@@ -41,13 +42,19 @@ class LecturerController extends Controller
             'phone'=>''
        ]);
 
-       $department = Auth::user()->department()->first();
-
+       $department = Auth::user()->lec_details->department()->first();
+       $fname = explode(' ', $req->name)[0] ?? 'undefined';
+       $user = new User();
+       $user->fname = $fname;
+       $user->lname = explode(' ', $req->name)[1] ?? 'undefined';
+       $user->email = $req->email;
+       $user->phone = $req->phone;
+       $user->password = bcrypt('password');
+       $user->role = 'lecturer';
+       $user->save();
        $lec = new Lecturer();
-       $lec->name = $req->name;
-       $lec->email = $req->email;
-       $lec->phone = $req->phone;
-       $lec->password = bcrypt('123456');
+       $lec->isHod = false;
+       $lec->user_id = $user->id;
        $department->lecturers()->save($lec);
 
        return redirect()->back()->with([
@@ -57,8 +64,8 @@ class LecturerController extends Controller
     }
 
     public function assigned(){
-    	$lec = Auth::user();
-    	$assigned = $lec->assigned()->orderBy('created_at','desc')->get();
+    	$lec = Auth::user()->lec_details;
+        $assigned = $lec->assigned()->orderBy('created_at','desc')->get();
     	return view('lecturer.content.myassigned',['assigned'=>$assigned]);
     }
 
@@ -92,7 +99,8 @@ class LecturerController extends Controller
             $students = $level->student()->get();
         }else{
             $student = collect([]);
-            $assigned = Lecturer::find(Auth::id())->assigned()->get()->pluck('level');
+            $lec = Auth::user()->lec_details;
+            $assigned = $lec->assigned()->get()->pluck('level');
             $collection = collect([]);
             foreach($assigned->toArray() as $a){
                  $thestudents = Level::find($a)->student()->get();
@@ -110,13 +118,15 @@ class LecturerController extends Controller
 
     public function student($id){
        return view('lecturer.content.task',[
-             'student'=> Student::find($id)
+        'student'=> Student::find($id),
+        'user' => Student::find($id)->user
        ]);
     }
 
      public function studentAssessment($id){
        return view('lecturer.content.assessment',[
-             'student'=> Student::find($id)
+        'student'=> Student::find($id),
+        'user' => Student::find($id)->user
        ]);
     }
 

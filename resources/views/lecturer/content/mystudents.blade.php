@@ -24,7 +24,7 @@
                  <ul class="list-unstyled activity-list">
                  	@foreach($students as $student)
                  	<li>
-                 		<h3>{{$student->fname}} {{$student->lname}}</h3>
+                 		<h3>{{$student->user->fname}} {{$student->user->lname}}</h3>
                  		Tasks: {{$student->field()->count()}} | New Tasks
                  		<br><br>
                  		<div class="btns-group">
@@ -50,11 +50,11 @@
                    <tbody>
                     @foreach($students as $student)
                      <tr>
-                       <td>{{$student->fname.' '.$student->lname}}</td>
+                       <td>{{$student->user->fname.' '.$student->user->lname}}</td>
                        <td>{{$student->regno}}</td>
-                       <td>{{$student->phone}}</td>
-                       <td>{{$student->email}}</td>
-                       <td>{{$student->course()->first()->name}} {{$student->level()->first()->year}}.{{$student->level()->first()->sem}}</td>
+                       <td>{{$student->user->phone || 'n/a'}}</td>
+                       <td>{{$student->user->email || 'n/a'}}</td>
+                       <td>{{($student->course) ? $student->course()->first()->name : 'n/a'}}</td>
                        <td>
                          <div class="btns-group">
                       <div class="btn btn-primary"><a href="{{ route('student',['id'=>$student->id])}}" style="color:#fff !important;">View Tasks</a></div>

@@ -19,7 +19,7 @@
     <div class="main-content">
         <div class="container-fluid">
         	@php 
-        	    $notifications = Auth::guard('lec')->user()->notifications;
+        	    $notifications = Auth::user()->notifications;
         	 @endphp
         	<div class="page-title">Notifications</div>
         	<div class="panel">
