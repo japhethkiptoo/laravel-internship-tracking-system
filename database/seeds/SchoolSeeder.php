@@ -12,21 +12,17 @@ class SchoolSeeder extends Seeder
     public function run()
     {
         DB::table('schools')->insert([
-           'name'=> 'Bussiness',
-           'description'=> 'school of business'
+           'name'=> 'School A',
+           'description'=> 'A short description of School A'
         ]);
 
         DB::table('schools')->insert([
-           'name'=> 'IT',
-           'description'=> 'school of Information technology'
+           'name'=> 'School B',
+           'description'=> 'A short description of School B'
         ]);
         DB::table('schools')->insert([
-           'name'=> 'Agriculture',
-           'description'=> 'school of Agriculture'
-        ]);
-        DB::table('schools')->insert([
-           'name'=> 'Medicine',
-           'description'=> 'school of medicine'
+           'name'=> 'School C',
+           'description'=> 'A short description of School C'
         ]);
     }
 }

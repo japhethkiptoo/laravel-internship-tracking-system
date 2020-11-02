@@ -12,25 +12,20 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         DB::table('departments')->insert([
-           'name' => 'Acturial',
+           'name' => 'Department D',
            'school'=> 1
         ]);
          DB::table('departments')->insert([
-           'name' => 'Statistics',
+           'name' => 'Department A',
            'school'=> 1
         ]);
         DB::table('departments')->insert([
-           'name' => 'computer Science',
+           'name' => 'Department B',
            'school'=> 2
         ]);
         DB::table('departments')->insert([
-           'name' => 'Forensics',
+           'name' => 'Department C',
            'school'=> 2
-        ]);
-
-        DB::table('departments')->insert([
-           'name' => 'Nursing',
-           'school'=> 4
         ]);
     }
 }

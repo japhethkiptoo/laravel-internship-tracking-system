@@ -26,5 +26,11 @@ class coursesTableSeeder extends Seeder
            'description' =>'computer course',
            'department' => 4
         ]);
+
+        DB::table('sem_years')->insert([
+           'course_id' => 1,
+           'year' => 4,
+           'sem' => 2
+        ]);
     }
 }

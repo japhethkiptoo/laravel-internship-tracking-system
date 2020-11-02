@@ -11,39 +11,18 @@ class LecSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('lecturers')->insert([
-             'name' => 'Lecturer 1',
-             'email' => 'lec1@myintern.io',
-             'phone' => '0724765149',
-             'password' => bcrypt('password'),
-             'department' => 3
-           
-        ]);
-        DB::table('lecturers')->insert([
-             'name' => 'Lecturer 4',
-             'email' => 'lec4@myintern.io',
-             'phone' => '0724765149',
-             'password' => bcrypt('password'),
-             'department' => 3,
-             'isHod' => true
-           
-        ]);
-        DB::table('lecturers')->insert([
-             'name' => 'Lecturer 2',
-             'email' => 'lec2@myintern.io',
-             'phone' => '0724765149',
-             'password' => bcrypt('password'),
-             'department' => 4
-           
-        ]);
-        DB::table('lecturers')->insert([
-             'name' => 'Lecturer 3',
-             'email' => 'lec3@myintern.io',
-             'phone' => '0724765149',
-             'password' => bcrypt('password'),
-             'department' => 4,
-             'isHod' => true
-           
-        ]);
+       DB::table('users')->insert([
+          'fname' => 'Test_lecturer',
+          'lname' => 'test_lec',
+          'email' => 'testlec@gmail.com',
+          'password' => Hash::make('password'),
+          'role'=> 'lecturer'
+       ]);
+
+       DB::table('lecturers')->insert([
+            'isHod' => false,
+            'department' => 1,
+            'user_id' => 2
+       ]);
     }
 }
